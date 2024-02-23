@@ -1,6 +1,6 @@
 package com.thesis.iwantmylawyer.user.lawyer;
 
-import com.thesis.iwantmylawyer.adress.Adress;
+import com.thesis.iwantmylawyer.address.Address;
 import com.thesis.iwantmylawyer.article.Article;
 import com.thesis.iwantmylawyer.commonquestion.CommonQuestion;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
@@ -32,7 +32,7 @@ public class Lawyer extends User {
     private String contactFaceBookUrl;
 
     @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "lawyer")
-    private Adress adress;
+    private Address address;
 
     @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinTable(joinColumns = @JoinColumn,inverseJoinColumns = @JoinColumn)

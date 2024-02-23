@@ -1,4 +1,4 @@
-package com.thesis.iwantmylawyer.adress;
+package com.thesis.iwantmylawyer.address;
 
 
 import com.thesis.iwantmylawyer.user.lawyer.Lawyer;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Adress {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
