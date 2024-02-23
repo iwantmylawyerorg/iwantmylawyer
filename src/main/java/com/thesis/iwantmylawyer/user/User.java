@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,10 +15,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
     private String email;
     private String password;
     private String firstName;
     private String lastName;
     private String telephoneNo;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }
