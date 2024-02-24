@@ -1,4 +1,4 @@
-package com.thesis.iwantmylawyer.expertisefield;
+package com.thesis.iwantmylawyer.city;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,22 +8,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class ExpertiseField {
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String name;
-    private String description;
-    private String photo;
 
-    public ExpertiseField(String name, String description, String photo) {
+    public City(String name) {
         this.name = name;
-        this.description = description;
-        this.photo = photo;
     }
 }

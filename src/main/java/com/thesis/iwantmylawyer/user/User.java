@@ -24,4 +24,20 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public User(String email, String password, String firstName, String lastName, String telephoneNo, Role role) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephoneNo = telephoneNo;
+        this.role = role;
+    }
+
+    public User(String email, String password, String firstName, String lastName, String telephoneNo) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephoneNo = telephoneNo;
+    }
 }

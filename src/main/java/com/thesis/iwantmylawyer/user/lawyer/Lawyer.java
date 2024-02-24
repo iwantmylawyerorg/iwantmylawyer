@@ -4,6 +4,7 @@ import com.thesis.iwantmylawyer.address.Address;
 import com.thesis.iwantmylawyer.article.Article;
 import com.thesis.iwantmylawyer.commonquestion.CommonQuestion;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
+import com.thesis.iwantmylawyer.user.Role;
 import com.thesis.iwantmylawyer.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,7 +44,6 @@ public class Lawyer extends User {
 
     @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "lawyer")
     private List<CommonQuestion> commonQuestionList;
-
 
 
 
