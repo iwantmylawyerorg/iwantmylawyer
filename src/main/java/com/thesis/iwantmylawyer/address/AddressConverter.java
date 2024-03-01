@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 public class AddressConverter {
 
     public AddressResponse convert(Address from){
+        if(from == null){
+            return null;
+        }
         return new AddressResponse(
                 from.getId(),
                 from.getStreet(),

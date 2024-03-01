@@ -9,5 +9,7 @@ public class Constant {
     public static final String CITY_DOES_NOT_FOUND_EXCEPTION = "City does not found!";
     public static final String LAWYER_ALREADY_EXISTS_EXCEPTION = "Lawyer already exists!";
     public static final String LAWYER_DOES_NOT_FOUND_EXCEPTION = "Lawyer does not found!";
+    public static final String ADDRESS_DOES_NOT_FOUND_EXCEPTION = "Address does not found!";
+    public static final String ARTICLE_DOES_NOT_FOUND_EXCEPTION = "Article does not found!";
 
 }

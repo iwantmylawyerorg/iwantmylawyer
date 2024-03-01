@@ -17,6 +17,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String header;
+    @Column(columnDefinition = "text")
     private String text;
     private LocalDateTime localDateTime;
 

@@ -25,6 +25,7 @@ public class Lawyer extends User {
     private String avukatKartPhoto;
     private String lawyerPhoto;
     private boolean isApproved = false;
+    @Column(columnDefinition = "text")
     private String aboutMe;
     private String contactEmail;
     private String contactTelNo;

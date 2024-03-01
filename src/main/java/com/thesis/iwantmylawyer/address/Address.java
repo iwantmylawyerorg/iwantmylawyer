@@ -25,4 +25,14 @@ public class Address {
     @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
     private Lawyer lawyer;
+
+    public Address(String street, String alley, String city, String state, String postalCode, String country, Lawyer lawyer) {
+        this.street = street;
+        this.alley = alley;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.country = country;
+        this.lawyer = lawyer;
+    }
 }
