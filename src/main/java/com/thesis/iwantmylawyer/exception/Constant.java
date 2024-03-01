@@ -6,4 +6,8 @@ public class Constant {
     public static final String CLIENT_EMAIL_ALREADY_EXISTS_EXCEPTION = "Client with this email already exists!";
     public static final String CLIENT_DOES_NOT_FOUND_EXCEPTION = "Client does not found!";
     public static final String CITY_ALREADY_EXISTS_EXCEPTION = "City already exists!";
+    public static final String CITY_DOES_NOT_FOUND_EXCEPTION = "City does not found!";
+    public static final String LAWYER_ALREADY_EXISTS_EXCEPTION = "Lawyer already exists!";
+    public static final String LAWYER_DOES_NOT_FOUND_EXCEPTION = "Lawyer does not found!";
+
 }

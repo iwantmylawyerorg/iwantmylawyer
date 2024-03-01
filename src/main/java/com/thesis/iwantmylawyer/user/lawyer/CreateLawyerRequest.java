@@ -5,7 +5,13 @@ public record CreateLawyerRequest(
         String password,
         String firstName,
         String lastName,
-        String telephoneNo
+        String telephoneNo,
+        String tcNo,
+
+        String baroSicilNo,
+
+        String cityId
+
 
 ) {
 }

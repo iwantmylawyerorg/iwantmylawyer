@@ -3,7 +3,7 @@ package com.thesis.iwantmylawyer.user.client;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ClientResponseConverter {
+public class ClientConverter {
 
     public ClientResponse convert(Client from){
         return new ClientResponse(

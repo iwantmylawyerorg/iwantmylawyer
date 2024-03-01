@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientService {
     private final ClientRepository clientRepository;
-    private final ClientResponseConverter clientResponseConverter;
+    private final ClientConverter clientConverter;
 
 
-    public ClientService(ClientRepository clientRepository, ClientResponseConverter clientResponseConverter) {
+    public ClientService(ClientRepository clientRepository, ClientConverter clientConverter) {
         this.clientRepository = clientRepository;
-        this.clientResponseConverter = clientResponseConverter;
+        this.clientConverter = clientConverter;
     }
     public ClientResponse getClientById(String id){
-        return clientResponseConverter.convert(findById(id));
+        return clientConverter.convert(findById(id));
     }
 
     public void createClient(CreateClientRequest createClientRequest){

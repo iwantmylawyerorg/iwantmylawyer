@@ -8,15 +8,15 @@ import java.util.List;
 @Service
 public class CityService {
     private final CityRepository cityRepository;
-    private final CityResponseConverter cityResponseConverter;
+    private final CityConverter cityConverter;
 
 
-    public CityService(CityRepository cityRepository, CityResponseConverter cityResponseConverter) {
+    public CityService(CityRepository cityRepository, CityConverter cityConverter) {
         this.cityRepository = cityRepository;
-        this.cityResponseConverter = cityResponseConverter;
+        this.cityConverter = cityConverter;
     }
     public List<CityResponse> getAllCities(){
-        return cityResponseConverter.convert(cityRepository.findAll());
+        return cityConverter.convert(cityRepository.findAll());
     }
 
     public void createCity(CreateCityRequest createCityRequest){
@@ -25,5 +25,10 @@ public class CityService {
         }
         City city = new City(createCityRequest.name());
         cityRepository.save(city);
+    }
+    public City findById(String id){
+        return cityRepository.findById(id).orElseThrow(
+                () -> new CityNotFoundException(Constant.CITY_DOES_NOT_FOUND_EXCEPTION)
+        );
     }
 }
