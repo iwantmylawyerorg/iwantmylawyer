@@ -1,7 +1,9 @@
 package com.thesis.iwantmylawyer.address;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record UpdateAddressRequest(
-        String addressId,
+        @NotBlank String lawyerId,
         String street,
         String alley,
         String city,

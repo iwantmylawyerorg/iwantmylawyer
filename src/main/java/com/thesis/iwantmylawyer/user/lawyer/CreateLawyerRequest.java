@@ -1,16 +1,18 @@
 package com.thesis.iwantmylawyer.user.lawyer;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record CreateLawyerRequest(
-        String email,
-        String password,
-        String firstName,
-        String lastName,
-        String telephoneNo,
-        String tcNo,
+        @NotBlank String email,
+        @NotBlank  String password,
+        @NotBlank String firstName,
+        @NotBlank  String lastName,
+        @NotBlank String telephoneNo,
+        @NotBlank String tcNo,
 
-        String baroSicilNo,
+        @NotBlank String baroSicilNo,
 
-        String cityId
+        @NotBlank String cityId
 
 
 ) {

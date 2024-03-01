@@ -1,12 +1,14 @@
 package com.thesis.iwantmylawyer.address;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record CreateAddressRequest(
-        String street,
-        String alley,
-        String city,
-        String state,
-        String postalCode,
-        String country,
-        String lawyerId
+        @NotBlank String street,
+        @NotBlank String alley,
+        @NotBlank String city,
+        @NotBlank String state,
+        @NotBlank String postalCode,
+        @NotBlank String country,
+        @NotBlank String lawyerId
 ) {
 }

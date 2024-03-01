@@ -1,7 +1,9 @@
 package com.thesis.iwantmylawyer.article;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record UpdateArticleRequest(
-        String articleId,
+        @NotBlank String articleId,
         String header,
         String text
 ) {

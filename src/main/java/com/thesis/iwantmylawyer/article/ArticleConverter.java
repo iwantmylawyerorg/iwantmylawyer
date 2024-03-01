@@ -14,7 +14,8 @@ public class ArticleConverter {
                 article.getId(),
                 article.getHeader(),
                 article.getText(),
-                article.getLocalDateTime())).toList();
+                article.getLocalDateTime(),
+                article.getPhoto())).toList();
 
     }
 
@@ -23,7 +24,8 @@ public class ArticleConverter {
                 from.getId(),
                 from.getHeader(),
                 from.getText(),
-                from.getLocalDateTime()
+                from.getLocalDateTime(),
+                from.getPhoto()
         );
     }
 }

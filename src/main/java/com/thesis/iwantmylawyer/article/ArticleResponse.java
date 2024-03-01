@@ -6,6 +6,8 @@ public record ArticleResponse(
         String id,
         String header,
         String text,
-        LocalDateTime localDateTime
+        LocalDateTime localDateTime,
+
+        String photo
 ) {
 }

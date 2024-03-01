@@ -20,8 +20,24 @@ public class Article {
     @Column(columnDefinition = "text")
     private String text;
     private LocalDateTime localDateTime;
+    private String photo;
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
     private Lawyer lawyer;
+
+    public Article(String header, String text, LocalDateTime localDateTime, Lawyer lawyer) {
+        this.header = header;
+        this.text = text;
+        this.localDateTime = localDateTime;
+        this.lawyer = lawyer;
+    }
+
+    public Article(String header, String text, LocalDateTime localDateTime, String photo, Lawyer lawyer) {
+        this.header = header;
+        this.text = text;
+        this.localDateTime = localDateTime;
+        this.photo = photo;
+        this.lawyer = lawyer;
+    }
 }

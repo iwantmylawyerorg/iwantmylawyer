@@ -1,6 +1,8 @@
 package com.thesis.iwantmylawyer.city;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record CreateCityRequest(
-        String name
+        @NotBlank String name
 ) {
 }

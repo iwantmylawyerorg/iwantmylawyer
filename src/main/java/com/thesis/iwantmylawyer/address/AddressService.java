@@ -31,7 +31,7 @@ public class AddressService {
         addressRepository.save(address);
     }
     public void updateAddress(UpdateAddressRequest updateAddressRequest){
-        Address address = findById(updateAddressRequest.addressId());
+        Address address = findById(updateAddressRequest.lawyerId());
         address.setAlley(updateAddressRequest.alley().trim().isEmpty() ? address.getAlley() : updateAddressRequest.alley());
         address.setCity(updateAddressRequest.city().trim().isEmpty() ? address.getCity() : updateAddressRequest.city());
         address.setCountry(updateAddressRequest.country().trim().isEmpty() ? address.getCountry() : updateAddressRequest.country());

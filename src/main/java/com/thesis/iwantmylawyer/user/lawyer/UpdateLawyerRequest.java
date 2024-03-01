@@ -1,7 +1,9 @@
 package com.thesis.iwantmylawyer.user.lawyer;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record UpdateLawyerRequest(
-        String id,
+        @NotBlank String id,
         String email,
         String password,
         String firstName,

@@ -1,12 +1,15 @@
 package com.thesis.iwantmylawyer.user.client;
 
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/client")
+@Validated
 public class ClientController {
     private final ClientService clientService;
 
@@ -16,7 +19,7 @@ public class ClientController {
 
 
     @GetMapping("/{clientId}")
-    public ResponseEntity<ClientResponse> getClientById(@PathVariable String clientId){
+    public ResponseEntity<ClientResponse> getClientById(@PathVariable @NotBlank String clientId){
          return new ResponseEntity<>(clientService.getClientById(clientId),HttpStatus.OK);
     }
     @PutMapping

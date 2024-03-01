@@ -20,4 +20,10 @@ public class CommonQuestion {
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
     private Lawyer lawyer;
+
+    public CommonQuestion(String questionLine, String answerLine, Lawyer lawyer) {
+        this.questionLine = questionLine;
+        this.answerLine = answerLine;
+        this.lawyer = lawyer;
+    }
 }

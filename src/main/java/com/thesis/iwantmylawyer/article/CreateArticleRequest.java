@@ -1,8 +1,10 @@
 package com.thesis.iwantmylawyer.article;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record CreateArticleRequest(
-        String lawyerId,
-        String header,
-        String text
+        @NotBlank String lawyerId,
+        @NotBlank String header,
+        @NotBlank String text
 ) {
 }
