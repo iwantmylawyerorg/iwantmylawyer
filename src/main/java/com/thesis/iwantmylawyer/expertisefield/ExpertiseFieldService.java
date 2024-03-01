@@ -24,6 +24,9 @@ public class ExpertiseFieldService {
     public List<ExpertiseFieldResponse> getAllExpertiseField(){
         return expertiseFieldConverter.convert(expertiseFieldRepository.findAll());
     }
+    public List<ExpertiseField> findByIdIn(List<String> idList){
+        return expertiseFieldRepository.findByIdIn(idList);
+    }
 
     public void createExpertiseField(String name,String description, MultipartFile multipartFile){
         if(expertiseFieldRepository.findByName(name).isPresent()){

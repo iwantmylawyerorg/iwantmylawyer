@@ -11,5 +11,4 @@ public interface LawyerRepository extends JpaRepository<Lawyer,String> {
 
 
     Optional<Lawyer> findByEmail(String email);
-    List<Lawyer> findAllBy(Pageable pageable);
 }

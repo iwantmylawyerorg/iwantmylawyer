@@ -8,7 +8,6 @@ import com.thesis.iwantmylawyer.expertisefield.ExpertiseFieldConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
 @Component
 public class LawyerConverter {
@@ -49,12 +48,12 @@ public class LawyerConverter {
         );
     }
 
-    public Page<List<LawyerGetAllResponse>> getAllConvert(Page<List<Lawyer>> fromList){
+    public Page<LawyerGetAllResponse> getAllConvert(Page<Lawyer> fromList){
         return fromList.map(lawyer -> new LawyerGetAllResponse(
-                lawyer.getFirstName(),
-                lawyer.getLastName(),
-                lawyer.getTelephoneNo(),
-                lawyer.getLawyerPhoto(),
-                cityConverter.convert(lawyer.getBaroKayitIl()));
+                        lawyer.getFirstName(),
+                        lawyer.getLastName(),
+                        lawyer.getTelephoneNo(),
+                        lawyer.getLawyerPhoto(),
+                        cityConverter.convert(lawyer.getBaroKayitIl())));
     }
 }
