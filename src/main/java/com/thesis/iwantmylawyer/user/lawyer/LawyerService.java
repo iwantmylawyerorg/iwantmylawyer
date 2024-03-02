@@ -6,6 +6,7 @@ import com.thesis.iwantmylawyer.exception.Constant;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseFieldService;
 import com.thesis.iwantmylawyer.minio.MinioService;
+import com.thesis.iwantmylawyer.user.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -114,6 +115,11 @@ public class LawyerService {
         Lawyer lawyer = findById(request.id());
         List<ExpertiseField> expertiseFields = expertiseFieldService.findByIdIn(request.expertiseFieldIdList());
         lawyer.getExpertiseFieldList().removeAll(expertiseFields);
+        lawyerRepository.save(lawyer);
+    }
+    public void addRoleForLawyer(String lawyerId){
+        Lawyer lawyer = findById(lawyerId);
+        lawyer.setRole(Role.LAWYER);
         lawyerRepository.save(lawyer);
     }
 

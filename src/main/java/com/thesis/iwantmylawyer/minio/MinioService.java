@@ -42,6 +42,9 @@ public class MinioService {
     }
 
     public String getBase64Image(String url) {
+        if(url == null){
+            return null;
+        }
         try (InputStream stream = minioClient.getObject(
                 GetObjectArgs.builder()
                         .bucket(bucketName)

@@ -14,5 +14,10 @@ public class Constant {
     public static final String ADDRESS_DOES_NOT_FOUND_EXCEPTION = "Address does not found!";
     public static final String ARTICLE_DOES_NOT_FOUND_EXCEPTION = "Article does not found!";
     public static final String COMMON_QUESTION_DOES_NOT_FOUND_EXCEPTION = "Common question does not found!";
+    public static final String POST_DOES_NOT_FOUND_EXCEPTION = "Post does not found!";
+    public static final String POSTCOMMENT_DOES_NOT_FOUND_EXCEPTION = "PostComment does not found!";
+    public static final String USER_NOT_FOUND_EXCEPTION = "User not found!";
+    public static final String LIKE_NOT_FOUND_EXCEPTION = "Like not found!";
+
 
 }

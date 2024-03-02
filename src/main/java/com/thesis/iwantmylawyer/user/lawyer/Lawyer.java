@@ -5,6 +5,7 @@ import com.thesis.iwantmylawyer.article.Article;
 import com.thesis.iwantmylawyer.city.City;
 import com.thesis.iwantmylawyer.commonquestion.CommonQuestion;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
+import com.thesis.iwantmylawyer.post.Post;
 import com.thesis.iwantmylawyer.user.Role;
 import com.thesis.iwantmylawyer.user.User;
 import jakarta.persistence.*;
@@ -24,7 +25,6 @@ public class Lawyer extends User {
     private String tcPhoto;
     private String avukatKartPhoto;
     private String lawyerPhoto;
-    private boolean isApproved = false;
     @Column(columnDefinition = "text")
     private String aboutMe;
     private String contactEmail;
@@ -49,6 +49,9 @@ public class Lawyer extends User {
 
     @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "lawyer")
     private List<CommonQuestion> commonQuestionList;
+
+    @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "lawyer")
+    private List<Post> postList;
 
     public Lawyer(String email, String password, String firstName, String lastName, String telephoneNo, String tcNo, String baroSicilNo, City baroKayitIl) {
         super(email, password, firstName, lastName, telephoneNo);

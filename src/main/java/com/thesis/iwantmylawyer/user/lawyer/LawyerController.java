@@ -83,6 +83,10 @@ public class LawyerController {
         lawyerService.removeExpertiseField(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    @PutMapping("/addRoleToLawyer/{id}")
+    public ResponseEntity<Void> addRoleToLawyer(@PathVariable String id){
+        lawyerService.addRoleForLawyer(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
