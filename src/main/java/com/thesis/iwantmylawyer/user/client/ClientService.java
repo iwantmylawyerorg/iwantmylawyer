@@ -2,17 +2,20 @@ package com.thesis.iwantmylawyer.user.client;
 
 import com.thesis.iwantmylawyer.exception.Constant;
 import com.thesis.iwantmylawyer.user.Role;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClientService {
     private final ClientRepository clientRepository;
     private final ClientConverter clientConverter;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public ClientService(ClientRepository clientRepository, ClientConverter clientConverter) {
+    public ClientService(ClientRepository clientRepository, ClientConverter clientConverter, PasswordEncoder passwordEncoder) {
         this.clientRepository = clientRepository;
         this.clientConverter = clientConverter;
+        this.passwordEncoder = passwordEncoder;
     }
     public ClientResponse getClientById(String id){
         return clientConverter.convert(findById(id));
@@ -24,7 +27,7 @@ public class ClientService {
         }
         Client client = new Client(
                 createClientRequest.email(),
-                createClientRequest.password(),
+                passwordEncoder.encode(createClientRequest.password()),
                 createClientRequest.firstName(),
                 createClientRequest.lastName(),
                 createClientRequest.telephoneNo(),

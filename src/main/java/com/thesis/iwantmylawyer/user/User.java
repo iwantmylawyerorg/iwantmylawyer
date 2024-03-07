@@ -2,8 +2,10 @@ package com.thesis.iwantmylawyer.user;
 
 import com.thesis.iwantmylawyer.like.Like;
 import com.thesis.iwantmylawyer.postcomment.PostComment;
+import com.thesis.iwantmylawyer.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -33,6 +36,9 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE,mappedBy = "user")
     private List<PostComment> postCommentList;
+
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
 
     public User(String email, String password, String firstName, String lastName, String telephoneNo, Role role) {
         this.email = email;

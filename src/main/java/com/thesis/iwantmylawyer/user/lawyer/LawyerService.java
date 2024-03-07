@@ -10,6 +10,7 @@ import com.thesis.iwantmylawyer.user.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,13 +23,15 @@ public class LawyerService {
     private final LawyerConverter lawyerConverter;
     private final MinioService minioService;
     private final ExpertiseFieldService expertiseFieldService;
+    private final PasswordEncoder passwordEncoder;
 
-    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService) {
+    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService, PasswordEncoder passwordEncoder) {
         this.lawyerRepository = lawyerRepository;
         this.cityService = cityService;
         this.lawyerConverter = lawyerConverter;
         this.minioService = minioService;
         this.expertiseFieldService = expertiseFieldService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public LawyerResponse getById(String id){
@@ -40,6 +43,7 @@ public class LawyerService {
         return lawyerConverter.getAllConvert(lawyerRepository.findAll(pageable));
     }
 
+
     public void createLawyer(CreateLawyerRequest createLawyerRequest){
         if(lawyerRepository.findByEmail(createLawyerRequest.email()).isPresent()){
             throw new LawyerAlreadyExistsException(Constant.LAWYER_ALREADY_EXISTS_EXCEPTION);
@@ -47,7 +51,7 @@ public class LawyerService {
         City city = cityService.findById(createLawyerRequest.cityId());
         Lawyer lawyer = new Lawyer(
                 createLawyerRequest.email(),
-                createLawyerRequest.password(),
+                passwordEncoder.encode(createLawyerRequest.password()),
                 createLawyerRequest.firstName(),
                 createLawyerRequest.lastName(),
                 createLawyerRequest.telephoneNo(),

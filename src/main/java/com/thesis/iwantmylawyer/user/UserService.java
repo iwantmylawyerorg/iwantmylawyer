@@ -15,4 +15,8 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(Constant.USER_NOT_FOUND_EXCEPTION));
     }
 
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(Constant.USER_NOT_FOUND_EXCEPTION));
+    }
+
 }
