@@ -1,6 +1,7 @@
 package com.thesis.iwantmylawyer.user.lawyer;
 
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
@@ -35,7 +36,7 @@ public class LawyerController {
         return new ResponseEntity<>(lawyerService.getAllLawyers(page, size),HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<Void> createLawyer(@RequestBody CreateLawyerRequest createLawyerRequest){
+    public ResponseEntity<Void> createLawyer(@RequestBody @Valid CreateLawyerRequest createLawyerRequest){
         lawyerService.createLawyer(createLawyerRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

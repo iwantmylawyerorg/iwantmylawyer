@@ -4,6 +4,8 @@ import com.thesis.iwantmylawyer.like.Like;
 import com.thesis.iwantmylawyer.postcomment.PostComment;
 import com.thesis.iwantmylawyer.token.Token;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

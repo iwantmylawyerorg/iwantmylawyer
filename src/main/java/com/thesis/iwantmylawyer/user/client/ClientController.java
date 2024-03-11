@@ -1,5 +1,6 @@
 package com.thesis.iwantmylawyer.user.client;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -23,13 +24,13 @@ public class ClientController {
          return new ResponseEntity<>(clientService.getClientById(clientId),HttpStatus.OK);
     }
     @PutMapping
-    public ResponseEntity<Void> updateClient(@RequestBody UpdateClientRequest updateClientRequest){
+    public ResponseEntity<Void> updateClient(@RequestBody @Valid UpdateClientRequest updateClientRequest){
         clientService.updateClient(updateClientRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Void> createClient(@RequestBody CreateClientRequest createClientRequest){
+    public ResponseEntity<Void> createClient(@RequestBody @Valid CreateClientRequest createClientRequest){
         clientService.createClient(createClientRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
