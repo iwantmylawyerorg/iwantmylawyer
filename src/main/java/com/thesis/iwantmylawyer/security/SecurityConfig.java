@@ -11,9 +11,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 @EnableWebSecurity
 @Configuration
@@ -31,15 +33,18 @@ public class SecurityConfig {
             "/swagger-ui.html",
             "/api/v1/auth/**",
             "/api/v1/lawyer/**",
-            "/api/v1/client/**"};
+            "/api/v1/client/**",
+            "/api/v1/city/**"};
     private final JwtFilter jwtFilter;
     private final SecurityUserService securityUserService;
     private final PasswordEncoder passwordEncoder;
+    private final LogoutHandler logoutHandler;
 
-    public SecurityConfig(JwtFilter jwtFilter, SecurityUserService securityUserService, PasswordEncoder passwordEncoder) {
+    public SecurityConfig(JwtFilter jwtFilter, SecurityUserService securityUserService, PasswordEncoder passwordEncoder, LogoutHandler logoutHandler) {
         this.jwtFilter = jwtFilter;
         this.securityUserService = securityUserService;
         this.passwordEncoder = passwordEncoder;
+        this.logoutHandler = logoutHandler;
     }
 
     @Bean
@@ -52,7 +57,14 @@ public class SecurityConfig {
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout(logout ->
+                        logout.logoutUrl("/api/v1/auth/logout")
+                                .addLogoutHandler(logoutHandler)
+                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+                )
+
                 .build();
+
 
     }
     @Bean

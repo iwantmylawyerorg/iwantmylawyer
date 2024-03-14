@@ -22,6 +22,7 @@ public class ClientService {
     }
 
     public void createClient(CreateClientRequest createClientRequest){
+
         if(clientRepository.findByEmail(createClientRequest.email()).isPresent()){
             throw new ClientAlreadyExistsException(Constant.CLIENT_EMAIL_ALREADY_EXISTS_EXCEPTION);
         }
@@ -53,6 +54,7 @@ public class ClientService {
     public Client findById(String id){
         return clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(Constant.CLIENT_DOES_NOT_FOUND_EXCEPTION));
     }
+
 
 
 }

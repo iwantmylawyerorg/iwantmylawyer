@@ -7,13 +7,18 @@ import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseFieldService;
 import com.thesis.iwantmylawyer.minio.MinioService;
 import com.thesis.iwantmylawyer.user.Role;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.springframework.data.domain.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,14 +29,18 @@ public class LawyerService {
     private final MinioService minioService;
     private final ExpertiseFieldService expertiseFieldService;
     private final PasswordEncoder passwordEncoder;
+    private final EntityManager entityManager;
+    private final CriteriaBuilder criteriaBuilder;
 
-    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService, PasswordEncoder passwordEncoder) {
+    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService, PasswordEncoder passwordEncoder, EntityManager entityManager) {
         this.lawyerRepository = lawyerRepository;
         this.cityService = cityService;
         this.lawyerConverter = lawyerConverter;
         this.minioService = minioService;
         this.expertiseFieldService = expertiseFieldService;
         this.passwordEncoder = passwordEncoder;
+        this.entityManager = entityManager;
+        this.criteriaBuilder = entityManager.getCriteriaBuilder();
     }
 
     public LawyerResponse getById(String id){
@@ -42,6 +51,47 @@ public class LawyerService {
         Pageable pageable = PageRequest.of(page, size);
         return lawyerConverter.getAllConvert(lawyerRepository.findAll(pageable));
     }
+
+    public Page<LawyerGetAllResponse> getAllLawyersWithFilter(LawyerSearchRequest lawyerSearchRequest){
+        CriteriaQuery<Lawyer> criteriaQuery = criteriaBuilder.createQuery(Lawyer.class);
+        Root<Lawyer> lawyerRoot = criteriaQuery.from(Lawyer.class);
+        Predicate predicate = getPredicate(lawyerSearchRequest, lawyerRoot);
+        criteriaQuery.where(predicate);
+
+        TypedQuery<Lawyer> typedQuery = entityManager.createQuery(criteriaQuery);
+        typedQuery.setFirstResult(lawyerSearchRequest.pageNumber() * lawyerSearchRequest.pageSize());
+        typedQuery.setMaxResults(lawyerSearchRequest.pageSize());
+
+        Pageable pageable = PageRequest.of(lawyerSearchRequest.pageNumber(), lawyerSearchRequest.pageSize());
+        List<Lawyer> resultList = typedQuery.getResultList();
+        long size = resultList.size();
+
+        return lawyerConverter.getAllConvert(new PageImpl<>(resultList,pageable,size));
+    }
+    private Predicate getPredicate(LawyerSearchRequest lawyerSearchRequest, Root<Lawyer> lawyerRoot){
+        List<Predicate> predicates = new ArrayList<>();
+        if(!lawyerSearchRequest.firstName().isEmpty()){
+            predicates.add(
+                    criteriaBuilder.like(lawyerRoot.get("firstName"),
+                            "%" + lawyerSearchRequest.firstName() + "%")
+            );
+        }
+        if(!lawyerSearchRequest.lastName().isEmpty()){
+            predicates.add(
+                    criteriaBuilder.like(lawyerRoot.get("lastName"),
+                            "%" + lawyerSearchRequest.lastName() + "%")
+            );
+        }
+        if(!lawyerSearchRequest.city().isEmpty()){
+            predicates.add(
+                    criteriaBuilder.like(lawyerRoot.get("baroKayitIl").get("name"),
+                            "%" + lawyerSearchRequest.city()+ "%")
+            );
+        }
+
+        return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+    }
+
 
 
     public void createLawyer(CreateLawyerRequest createLawyerRequest){

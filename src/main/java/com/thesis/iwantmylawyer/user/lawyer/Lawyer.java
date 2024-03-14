@@ -36,7 +36,7 @@ public class Lawyer extends User {
     @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "lawyer")
     private Address address;
 
-    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
     private City baroKayitIl;
 

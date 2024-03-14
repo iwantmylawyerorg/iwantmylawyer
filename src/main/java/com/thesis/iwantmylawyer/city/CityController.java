@@ -1,5 +1,6 @@
 package com.thesis.iwantmylawyer.city;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
