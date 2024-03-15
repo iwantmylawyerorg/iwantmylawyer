@@ -34,7 +34,7 @@ public class SecurityConfig {
             "/api/v1/auth/**",
             "/api/v1/lawyer/**",
             "/api/v1/client/**",
-            "/api/v1/city/**"};
+            };
     private final JwtFilter jwtFilter;
     private final SecurityUserService securityUserService;
     private final PasswordEncoder passwordEncoder;
@@ -52,7 +52,10 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(x ->x
-                        .requestMatchers(WHITE_LIST_URL).permitAll()
+                        .requestMatchers(WHITE_LIST_URL)
+                        .permitAll()
+                        .requestMatchers("/api/v1/city/**")
+                        .authenticated()
                 )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

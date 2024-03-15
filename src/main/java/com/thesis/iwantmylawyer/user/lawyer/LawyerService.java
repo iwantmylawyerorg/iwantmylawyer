@@ -68,6 +68,7 @@ public class LawyerService {
 
         return lawyerConverter.getAllConvert(new PageImpl<>(resultList,pageable,size));
     }
+
     private Predicate getPredicate(LawyerSearchRequest lawyerSearchRequest, Root<Lawyer> lawyerRoot){
         List<Predicate> predicates = new ArrayList<>();
         if(!lawyerSearchRequest.firstName().isEmpty()){
