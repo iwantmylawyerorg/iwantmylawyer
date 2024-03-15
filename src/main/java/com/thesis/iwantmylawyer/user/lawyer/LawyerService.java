@@ -52,46 +52,13 @@ public class LawyerService {
         return lawyerConverter.getAllConvert(lawyerRepository.findAll(pageable));
     }
 
-    public Page<LawyerGetAllResponse> getAllLawyersWithFilter(LawyerSearchRequest lawyerSearchRequest){
-        CriteriaQuery<Lawyer> criteriaQuery = criteriaBuilder.createQuery(Lawyer.class);
-        Root<Lawyer> lawyerRoot = criteriaQuery.from(Lawyer.class);
-        Predicate predicate = getPredicate(lawyerSearchRequest, lawyerRoot);
-        criteriaQuery.where(predicate);
+    public Page<LawyerGetAllResponse> getAllLawyersWithFilter(Integer page, Integer size,String firstName,String lastName,String city){
+        Pageable pageable = PageRequest.of(page, size);
 
-        TypedQuery<Lawyer> typedQuery = entityManager.createQuery(criteriaQuery);
-        typedQuery.setFirstResult(lawyerSearchRequest.pageNumber() * lawyerSearchRequest.pageSize());
-        typedQuery.setMaxResults(lawyerSearchRequest.pageSize());
-
-        Pageable pageable = PageRequest.of(lawyerSearchRequest.pageNumber(), lawyerSearchRequest.pageSize());
-        List<Lawyer> resultList = typedQuery.getResultList();
-        long size = resultList.size();
-
-        return lawyerConverter.getAllConvert(new PageImpl<>(resultList,pageable,size));
+        return lawyerConverter.getAllConvert(lawyerRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCase(firstName.trim(),lastName.trim(),city.trim(),pageable));
     }
 
-    private Predicate getPredicate(LawyerSearchRequest lawyerSearchRequest, Root<Lawyer> lawyerRoot){
-        List<Predicate> predicates = new ArrayList<>();
-        if(!lawyerSearchRequest.firstName().isEmpty()){
-            predicates.add(
-                    criteriaBuilder.like(lawyerRoot.get("firstName"),
-                            "%" + lawyerSearchRequest.firstName() + "%")
-            );
-        }
-        if(!lawyerSearchRequest.lastName().isEmpty()){
-            predicates.add(
-                    criteriaBuilder.like(lawyerRoot.get("lastName"),
-                            "%" + lawyerSearchRequest.lastName() + "%")
-            );
-        }
-        if(!lawyerSearchRequest.city().isEmpty()){
-            predicates.add(
-                    criteriaBuilder.like(lawyerRoot.get("baroKayitIl").get("name"),
-                            "%" + lawyerSearchRequest.city()+ "%")
-            );
-        }
 
-        return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-    }
 
 
 

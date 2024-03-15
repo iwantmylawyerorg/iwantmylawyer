@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -102,8 +103,9 @@ public class AuthenticationService {
         if (userEmail != null) {
             var user = userService.findByEmail(userEmail);
             var securityUser = securityUserService.loadUserByUsername(userEmail);
+            List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(userService.findByEmail(userEmail).getId());
 
-            if (jwtService.isTokenValid(refreshToken, securityUser)) {
+            if (jwtService.isTokenValid(refreshToken, securityUser) && !validUserTokens.isEmpty()) {
                 var accessToken = jwtService.generateToken(securityUser);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);

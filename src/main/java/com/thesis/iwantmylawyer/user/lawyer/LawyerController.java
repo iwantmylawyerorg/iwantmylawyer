@@ -32,9 +32,13 @@ public class LawyerController {
                                                                     @PathVariable @NotNull Integer size){
         return new ResponseEntity<>(lawyerService.getAllLawyers(page, size),HttpStatus.OK);
     }
-   @PostMapping("/getAllLawyersWithFilter")
-    public ResponseEntity<Page<LawyerGetAllResponse>> getAllLawyersWithFilter(@RequestBody  LawyerSearchRequest lawyerSearchRequest){
-        return new ResponseEntity<>(lawyerService.getAllLawyersWithFilter(lawyerSearchRequest),HttpStatus.OK);
+   @GetMapping("/{page}/{size}/{firstName}/{lastName}/{city}")
+    public ResponseEntity<Page<LawyerGetAllResponse>> getAllLawyersWithFilter(@PathVariable(required = false) Integer page,
+                                                                              @PathVariable(required = false) Integer size,
+                                                                              @PathVariable(required = false) String firstName,
+                                                                              @PathVariable(required = false) String lastName,
+                                                                              @PathVariable(required = false) String city){
+        return new ResponseEntity<>(lawyerService.getAllLawyersWithFilter(page, size, firstName, lastName, city),HttpStatus.OK);
     }
 
     @PostMapping
