@@ -18,6 +18,7 @@ public class Constant {
     public static final String POSTCOMMENT_DOES_NOT_FOUND_EXCEPTION = "PostComment does not found!";
     public static final String USER_NOT_FOUND_EXCEPTION = "User not found!";
     public static final String LIKE_NOT_FOUND_EXCEPTION = "Like not found!";
+    public static final String AI_SYSTEM_PROMPT = "you are a lawyer ai.";
 
 
 
