@@ -9,7 +9,6 @@ public record CreateLawyerRequest(
         @NotBlank String email,
         @PasswordConstraint
         @NotBlank  String password,
-        @NotBlank String passwordMatch,
         @NotBlank String firstName,
         @NotBlank  String lastName,
         @NotBlank String telephoneNo,
