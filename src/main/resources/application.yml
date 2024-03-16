@@ -1,8 +1,8 @@
+#postgres
 spring:
   jpa:
     hibernate:
       ddl-auto: update
-
   datasource:
     url: jdbc:postgresql://localhost:5432/iwantmylawyerdb
     username: username
@@ -10,6 +10,7 @@ spring:
   threads:
     virtual:
       enabled: true
+#spring-ai
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
@@ -18,15 +19,29 @@ spring:
           model: gpt-3.5-turbo
           temperature: 0.7
           max-tokens: 1000
+#redis
+  cache:
+    type: redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
+cache:
+  config:
+    entryTtl: 60
+    post:
+      entryTtl: 30
 server:
   port: 8080
 
+#minio
 minio:
   url: http://localhost:9000/
   accessKey: uSXaYtmDqGJvX8VF7aZe
   secretKey: wazxTSdfqXnJZvcKGOl1eX6K1aqLbP55F8Y8FQT1
   bucketName: icon
 
+#jwtToken
 application:
   security:
     jwt:
@@ -34,5 +49,4 @@ application:
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # 7 days
-
 

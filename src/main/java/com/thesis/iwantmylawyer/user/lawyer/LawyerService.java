@@ -2,23 +2,18 @@ package com.thesis.iwantmylawyer.user.lawyer;
 
 import com.thesis.iwantmylawyer.city.City;
 import com.thesis.iwantmylawyer.city.CityService;
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseFieldService;
 import com.thesis.iwantmylawyer.minio.MinioService;
 import com.thesis.iwantmylawyer.user.Role;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import org.springframework.data.domain.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

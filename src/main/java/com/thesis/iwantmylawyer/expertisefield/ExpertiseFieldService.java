@@ -1,6 +1,6 @@
 package com.thesis.iwantmylawyer.expertisefield;
 
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.minio.MinioService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

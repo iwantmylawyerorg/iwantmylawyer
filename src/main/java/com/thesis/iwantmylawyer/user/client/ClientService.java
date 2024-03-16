@@ -1,6 +1,6 @@
 package com.thesis.iwantmylawyer.user.client;
 
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.user.Role;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

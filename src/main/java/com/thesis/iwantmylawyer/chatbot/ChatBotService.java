@@ -1,7 +1,7 @@
 package com.thesis.iwantmylawyer.chatbot;
 
 
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.ChatResponse;
 import org.springframework.ai.chat.messages.Message;

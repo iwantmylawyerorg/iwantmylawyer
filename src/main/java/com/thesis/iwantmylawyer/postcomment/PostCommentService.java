@@ -1,6 +1,6 @@
 package com.thesis.iwantmylawyer.postcomment;
 
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.post.Post;
 import com.thesis.iwantmylawyer.post.PostService;
 import com.thesis.iwantmylawyer.user.User;

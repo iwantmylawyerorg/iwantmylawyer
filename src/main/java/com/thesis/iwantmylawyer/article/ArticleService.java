@@ -1,6 +1,6 @@
 package com.thesis.iwantmylawyer.article;
 
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.minio.MinioService;
 import com.thesis.iwantmylawyer.user.lawyer.Lawyer;
 import com.thesis.iwantmylawyer.user.lawyer.LawyerService;

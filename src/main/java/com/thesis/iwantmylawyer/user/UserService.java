@@ -1,6 +1,6 @@
 package com.thesis.iwantmylawyer.user;
 
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import org.springframework.stereotype.Service;
 
 @Service

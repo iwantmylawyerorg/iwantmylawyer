@@ -1,6 +1,6 @@
 package com.thesis.iwantmylawyer.city;
 
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.thesis.iwantmylawyer.exception;
+package com.thesis.iwantmylawyer.constant;
 
 public class Constant {
     private Constant(){
@@ -19,6 +19,8 @@ public class Constant {
     public static final String USER_NOT_FOUND_EXCEPTION = "User not found!";
     public static final String LIKE_NOT_FOUND_EXCEPTION = "Like not found!";
     public static final String AI_SYSTEM_PROMPT = "you are a lawyer ai.";
+
+    public static final String REDIS_POST_CLASS = "post";
 
 
 

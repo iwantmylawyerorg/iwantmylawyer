@@ -1,10 +1,8 @@
 package com.thesis.iwantmylawyer.like;
 
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.post.Post;
 import com.thesis.iwantmylawyer.post.PostService;
-import com.thesis.iwantmylawyer.postcomment.CreatePostCommentRequest;
-import com.thesis.iwantmylawyer.postcomment.PostComment;
 import com.thesis.iwantmylawyer.user.User;
 import com.thesis.iwantmylawyer.user.UserService;
 import org.springframework.stereotype.Service;

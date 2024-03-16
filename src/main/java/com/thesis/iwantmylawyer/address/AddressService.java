@@ -1,6 +1,6 @@
 package com.thesis.iwantmylawyer.address;
 
-import com.thesis.iwantmylawyer.exception.Constant;
+import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.user.lawyer.Lawyer;
 import com.thesis.iwantmylawyer.user.lawyer.LawyerService;
 import org.springframework.stereotype.Service;
