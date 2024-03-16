@@ -24,18 +24,15 @@ public class LawyerService {
     private final MinioService minioService;
     private final ExpertiseFieldService expertiseFieldService;
     private final PasswordEncoder passwordEncoder;
-    private final EntityManager entityManager;
-    private final CriteriaBuilder criteriaBuilder;
 
-    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService, PasswordEncoder passwordEncoder, EntityManager entityManager) {
+    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService, PasswordEncoder passwordEncoder) {
         this.lawyerRepository = lawyerRepository;
         this.cityService = cityService;
         this.lawyerConverter = lawyerConverter;
         this.minioService = minioService;
         this.expertiseFieldService = expertiseFieldService;
         this.passwordEncoder = passwordEncoder;
-        this.entityManager = entityManager;
-        this.criteriaBuilder = entityManager.getCriteriaBuilder();
+
     }
 
     public LawyerResponse getById(String id){

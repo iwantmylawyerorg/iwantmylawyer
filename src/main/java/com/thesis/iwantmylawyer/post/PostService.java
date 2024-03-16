@@ -56,6 +56,8 @@ public class PostService {
         postRepository.delete(findById(postId));
     }
 
+
+    @Cacheable(value = Constant.REDIS_POST_CLASS, key = "#id")
     public Post findById(String id){
         return postRepository.findById(id).orElseThrow(() -> new PostDoesNotFoundException(Constant.POST_DOES_NOT_FOUND_EXCEPTION));
     }

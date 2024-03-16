@@ -21,7 +21,8 @@ public class ChatBotService {
     public ChatBotService(ChatClient chatClient) {
         this.chatClient = chatClient;
         this.messageList = new ArrayList<>();
-        Message systemMessage = new SystemPromptTemplate(Constant.AI_SYSTEM_PROMPT).createMessage();
+        Message systemMessage = new SystemPromptTemplate(Constant.AI_SYSTEM_PROMPT)
+                .createMessage();
         messageList.add(systemMessage);
     }
 
