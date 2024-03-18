@@ -22,7 +22,11 @@ public class PostController {
     @GetMapping("/{page}/{size}")
     public ResponseEntity<Page<PostResponse>> getAllPosts(@PathVariable @NotNull Integer page,
                                                           @PathVariable @NotNull Integer size){
-        return new ResponseEntity<>(postService.getAllLawyers(page, size),HttpStatus.OK);
+        return new ResponseEntity<>(postService.getAllPosts(page, size),HttpStatus.OK);
+    }
+    @GetMapping("/getPostById/{postId}")
+    public ResponseEntity<PostResponse> getPostById(@PathVariable String postId){
+        return new ResponseEntity<>(postService.getPostById(postId),HttpStatus.OK);
     }
 
     @PostMapping

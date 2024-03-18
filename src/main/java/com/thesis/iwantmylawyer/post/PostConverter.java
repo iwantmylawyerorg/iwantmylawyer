@@ -20,6 +20,16 @@ public class PostConverter {
         this.minioService = minioService;
     }
 
+    public PostResponse convert(Post from){
+        return new PostResponse(
+                from.getId(),
+                from.getText(),
+                minioService.getBase64Image(from.getPostPhoto()),
+                from.getLocalDateTime(),
+                postCommentConverter.convert(from.getPostCommentList()),
+                likeConverter.convert(from.getLikeList()));
+
+    }
 
     public Page<PostResponse> convert(Page<Post> fromList){
         return fromList.map(post -> new PostResponse(

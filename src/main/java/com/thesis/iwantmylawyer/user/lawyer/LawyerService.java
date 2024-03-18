@@ -40,6 +40,7 @@ public class LawyerService {
     }
 
     public Page<LawyerGetAllResponse> getAllLawyers(Integer page, Integer size){
+        System.out.println("veritabanından zort");
         Pageable pageable = PageRequest.of(page, size);
         return lawyerConverter.getAllConvert(lawyerRepository.findAll(pageable));
     }

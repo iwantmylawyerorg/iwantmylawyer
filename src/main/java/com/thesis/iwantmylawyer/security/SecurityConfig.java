@@ -35,6 +35,7 @@ public class SecurityConfig {
             "/api/v1/lawyer/**",
             "/api/v1/client/**",
             "/api/v1/chatbot/**",
+            "/api/v1/post/**"
             };
     private final JwtFilter jwtFilter;
     private final SecurityUserService securityUserService;

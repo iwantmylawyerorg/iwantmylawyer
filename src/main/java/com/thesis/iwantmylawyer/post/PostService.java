@@ -30,10 +30,15 @@ public class PostService {
     }
 
     @Cacheable(Constant.REDIS_POST_CLASS)
-    public Page<PostResponse> getAllLawyers(Integer page, Integer size){
+    public Page<PostResponse> getAllPosts(Integer page, Integer size){
         System.out.println("Veri tabanından geldi");
         Pageable pageable = PageRequest.of(page, size);
         return postConverter.convert(postRepository.findAll(pageable));
+    }
+    @Cacheable(value = Constant.REDIS_POST_CLASS,key = "#postId")
+    public PostResponse getPostById(String postId){
+        System.out.println("veri tabanindan");
+        return postConverter.convert(findById(postId));
     }
 
     @CacheEvict(value = Constant.REDIS_POST_CLASS, allEntries = true, condition = "#createPostRequest != null")
@@ -57,7 +62,7 @@ public class PostService {
     }
 
 
-    @Cacheable(value = Constant.REDIS_POST_CLASS, key = "#id")
+
     public Post findById(String id){
         return postRepository.findById(id).orElseThrow(() -> new PostDoesNotFoundException(Constant.POST_DOES_NOT_FOUND_EXCEPTION));
     }
