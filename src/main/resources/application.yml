@@ -26,6 +26,18 @@ spring:
     redis:
       host: localhost
       port: 6379
+#mail
+  mail:
+    password: rcahpocvffnpiaka
+    host: smtp.gmail.com
+    username: yunusemreozcan2611@gmail.com
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enabled: true
+          auth: true
+    port: 587
 cache:
   config:
     entryTtl: 60

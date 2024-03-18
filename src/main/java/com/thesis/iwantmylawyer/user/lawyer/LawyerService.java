@@ -5,10 +5,10 @@ import com.thesis.iwantmylawyer.city.CityService;
 import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseFieldService;
+import com.thesis.iwantmylawyer.mail.MailService;
+import com.thesis.iwantmylawyer.mail.SendMailRequest;
 import com.thesis.iwantmylawyer.minio.MinioService;
 import com.thesis.iwantmylawyer.user.Role;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.domain.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,8 +24,9 @@ public class LawyerService {
     private final MinioService minioService;
     private final ExpertiseFieldService expertiseFieldService;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
-    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService, PasswordEncoder passwordEncoder) {
+    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService, PasswordEncoder passwordEncoder, MailService mailService) {
         this.lawyerRepository = lawyerRepository;
         this.cityService = cityService;
         this.lawyerConverter = lawyerConverter;
@@ -33,6 +34,7 @@ public class LawyerService {
         this.expertiseFieldService = expertiseFieldService;
         this.passwordEncoder = passwordEncoder;
 
+        this.mailService = mailService;
     }
 
     public LawyerResponse getById(String id){
@@ -71,6 +73,8 @@ public class LawyerService {
                 city
         );
         lawyerRepository.save(lawyer);
+        SendMailRequest sendMailRequest = new SendMailRequest(lawyer.getEmail(),"Hesabın oluşturuldu","Pompa");
+        mailService.sendMail(sendMailRequest);
     }
     public Lawyer findById(String id){
         return lawyerRepository.findById(id).orElseThrow(() -> new LawyerNotFoundException(Constant.LAWYER_DOES_NOT_FOUND_EXCEPTION));
