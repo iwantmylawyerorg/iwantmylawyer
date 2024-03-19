@@ -28,9 +28,9 @@ spring:
       port: 6379
 #mail
   mail:
-    password: raakdfcydlnprqts
+    password: ${APP_GMAIL_PASSWORD}
     host: smtp.gmail.com
-    username: batikanyeni57@gmail.com
+    username: iwantmylawyerinfo@gmail.com
     port: 587
     properties:
       mail:

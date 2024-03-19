@@ -74,7 +74,7 @@ public class LawyerService {
         lawyerRepository.save(lawyer);
         /* TODO ACMAYI UNUTMA
         SendMailRequest sendMailRequest = new SendMailRequest(lawyer.getEmail(),"Hesabın oluşturuldu","Pompa");
-        mailService.sendMail(sendMailRequest);*/
+        mailService.sendMail(sendMailRequest); */
     }
     public Lawyer findById(String id){
         return lawyerRepository.findById(id).orElseThrow(() -> new LawyerNotFoundException(Constant.LAWYER_DOES_NOT_FOUND_EXCEPTION));
