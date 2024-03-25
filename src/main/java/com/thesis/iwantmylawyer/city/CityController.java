@@ -28,4 +28,5 @@ public class CityController {
         cityService.createCity(createCityRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

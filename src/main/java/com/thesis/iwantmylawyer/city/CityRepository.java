@@ -10,6 +10,4 @@ public interface CityRepository extends JpaRepository<City,String> {
 
     Optional<City> findByName(String name);
 
-    @Query("select new com.thesis.iwantmylawyer.city.CityResponse(c.id, c.name) from City c where c.id = :id")
-    List<CityResponse> findCityResponseById(String id);
 }

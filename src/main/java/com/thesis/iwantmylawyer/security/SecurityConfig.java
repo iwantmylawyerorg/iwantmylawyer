@@ -35,7 +35,8 @@ public class SecurityConfig {
             "/api/v1/lawyer/**",
             "/api/v1/client/**",
             "/api/v1/chatbot/**",
-            "/api/v1/post/**"
+            "/api/v1/post/**",
+            "/api/v1/city/**"
             };
     private final JwtFilter jwtFilter;
     private final SecurityUserService securityUserService;
@@ -56,8 +57,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(x ->x
                         .requestMatchers(WHITE_LIST_URL)
                         .permitAll()
-                        .requestMatchers("/api/v1/city/**")
-                        .authenticated()
+
                 )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
