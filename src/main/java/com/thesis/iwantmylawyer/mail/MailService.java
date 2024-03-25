@@ -15,13 +15,12 @@ public class MailService {
         this.mailSender = mailSender;
     }
 
-    public String sendMail(SendMailRequest sendMailRequest){
+    public void sendMail(SendMailRequest sendMailRequest){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@metsoft.com");
         message.setTo(sendMailRequest.to());
         message.setText(sendMailRequest.text());
         message.setSubject(sendMailRequest.subject());
         mailSender.send(message);
-        return "Gönderildi";
     }
 }
