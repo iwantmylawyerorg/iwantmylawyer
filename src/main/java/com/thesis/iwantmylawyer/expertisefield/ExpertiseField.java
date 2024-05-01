@@ -18,12 +18,9 @@ public class ExpertiseField {
     private String id;
 
     private String name;
-    private String description;
-    private String photo;
 
-    public ExpertiseField(String name, String description, String photo) {
+
+    public ExpertiseField(String name) {
         this.name = name;
-        this.description = description;
-        this.photo = photo;
     }
 }

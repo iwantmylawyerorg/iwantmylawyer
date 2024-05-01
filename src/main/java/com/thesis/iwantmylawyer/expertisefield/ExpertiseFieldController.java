@@ -26,12 +26,11 @@ public class ExpertiseFieldController {
         return new ResponseEntity<>(expertiseFieldService.getAllExpertiseField(),HttpStatus.OK);
     }
 
-    @PostMapping(path = "/{name}/{description}", consumes =  {MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(path = "/{name}")
     public ResponseEntity<Void> createExpertiseField(
-            @PathVariable("name") @NotBlank String name,
-            @PathVariable("description") @NotBlank  String description,
-            @RequestPart("file") @NotNull MultipartFile file) {
-            expertiseFieldService.createExpertiseField(name,description,file);
+            @PathVariable("name") @NotBlank String name){
+
+            expertiseFieldService.createExpertiseField(name);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

@@ -53,8 +53,8 @@ public class Lawyer extends User {
     @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "lawyer")
     private List<Post> postList;
 
-    public Lawyer(String email, String password, String firstName, String lastName, String telephoneNo, String tcNo, String baroSicilNo, City baroKayitIl) {
-        super(email, password, firstName, lastName, telephoneNo);
+    public Lawyer(String email, String password, String firstName, String lastName, String telephoneNo, String tcNo, String baroSicilNo, City baroKayitIl,Role role) {
+        super(email, password, firstName, lastName, telephoneNo,role);
         this.tcNo = tcNo;
         this.baroSicilNo = baroSicilNo;
         this.baroKayitIl = baroKayitIl;

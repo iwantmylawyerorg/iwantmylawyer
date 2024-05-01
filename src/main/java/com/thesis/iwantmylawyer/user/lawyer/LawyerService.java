@@ -69,7 +69,8 @@ public class LawyerService {
                 createLawyerRequest.telephoneNo(),
                 createLawyerRequest.tcNo(),
                 createLawyerRequest.baroSicilNo(),
-                city
+                city,
+                Role.LAWYER_UNCONFIRMED
         );
         lawyerRepository.save(lawyer);
         /* TODO ACMAYI UNUTMA

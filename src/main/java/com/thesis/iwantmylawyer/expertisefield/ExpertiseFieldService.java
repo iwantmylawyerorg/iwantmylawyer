@@ -10,14 +10,12 @@ import java.util.List;
 @Service
 public class ExpertiseFieldService {
     private final ExpertiseFieldRepository expertiseFieldRepository;
-    private final MinioService minioService;
 
     private final ExpertiseFieldConverter expertiseFieldConverter;
 
 
-    public ExpertiseFieldService(ExpertiseFieldRepository expertiseFieldRepository, MinioService minioService, ExpertiseFieldConverter expertiseFieldConverter) {
+    public ExpertiseFieldService(ExpertiseFieldRepository expertiseFieldRepository,ExpertiseFieldConverter expertiseFieldConverter) {
         this.expertiseFieldRepository = expertiseFieldRepository;
-        this.minioService = minioService;
         this.expertiseFieldConverter = expertiseFieldConverter;
     }
 
@@ -28,15 +26,13 @@ public class ExpertiseFieldService {
         return expertiseFieldRepository.findByIdIn(idList);
     }
 
-    public void createExpertiseField(String name,String description, MultipartFile multipartFile){
+    public void createExpertiseField(String name){
         if(expertiseFieldRepository.findByName(name).isPresent()){
             throw new ExpertiseFieldAlreadyExistsException(Constant.EXPERTISE_FIELD_ALREADY_EXISTS_EXCEPTION);
         }
 
         ExpertiseField expertiseField = new ExpertiseField(
-                name,
-                description,
-                minioService.uploadImage(multipartFile)
+                name
                 );
 
         expertiseFieldRepository.save(expertiseField);
