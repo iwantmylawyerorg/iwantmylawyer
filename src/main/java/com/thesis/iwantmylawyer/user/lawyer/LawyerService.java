@@ -6,9 +6,9 @@ import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseFieldService;
 import com.thesis.iwantmylawyer.mail.MailService;
-import com.thesis.iwantmylawyer.mail.SendMailRequest;
 import com.thesis.iwantmylawyer.minio.MinioService;
 import com.thesis.iwantmylawyer.user.Role;
+import com.thesis.iwantmylawyer.user.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,15 +25,17 @@ public class LawyerService {
     private final MinioService minioService;
     private final ExpertiseFieldService expertiseFieldService;
     private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
     private final MailService mailService;
 
-    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService, PasswordEncoder passwordEncoder, MailService mailService) {
+    public LawyerService(LawyerRepository lawyerRepository, CityService cityService, LawyerConverter lawyerConverter, MinioService minioService, ExpertiseFieldService expertiseFieldService, PasswordEncoder passwordEncoder, UserService userService, MailService mailService) {
         this.lawyerRepository = lawyerRepository;
         this.cityService = cityService;
         this.lawyerConverter = lawyerConverter;
         this.minioService = minioService;
         this.expertiseFieldService = expertiseFieldService;
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
 
         this.mailService = mailService;
     }
@@ -57,7 +59,7 @@ public class LawyerService {
 
     @Transactional
     public void createLawyer(CreateLawyerRequest createLawyerRequest){
-        if(lawyerRepository.findByEmail(createLawyerRequest.email()).isPresent()){
+        if(userService.findUserByEmail(createLawyerRequest.email()).isPresent()){
             throw new LawyerAlreadyExistsException(Constant.LAWYER_ALREADY_EXISTS_EXCEPTION);
         }
         City city = cityService.findById(createLawyerRequest.cityId());

@@ -2,6 +2,7 @@ package com.thesis.iwantmylawyer.user.client;
 
 import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.user.Role;
+import com.thesis.iwantmylawyer.user.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +11,14 @@ public class ClientService {
     private final ClientRepository clientRepository;
     private final ClientConverter clientConverter;
     private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
 
-    public ClientService(ClientRepository clientRepository, ClientConverter clientConverter, PasswordEncoder passwordEncoder) {
+    public ClientService(ClientRepository clientRepository, ClientConverter clientConverter, PasswordEncoder passwordEncoder, UserService userService) {
         this.clientRepository = clientRepository;
         this.clientConverter = clientConverter;
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
     public ClientResponse getClientById(String id){
         return clientConverter.convert(findById(id));
@@ -23,7 +26,7 @@ public class ClientService {
 
     public void createClient(CreateClientRequest createClientRequest){
 
-        if(clientRepository.findByEmail(createClientRequest.email()).isPresent()){
+        if(userService.findUserByEmail(createClientRequest.email()).isPresent()){
             throw new ClientAlreadyExistsException(Constant.CLIENT_EMAIL_ALREADY_EXISTS_EXCEPTION);
         }
         Client client = new Client(
