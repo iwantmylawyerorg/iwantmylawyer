@@ -14,9 +14,7 @@ public record CreateLawyerRequest(
         @NotBlank String telephoneNo,
         @NotBlank String tcNo,
         @NotBlank String baroSicilNo,
-
         @NotBlank String cityId
-
 
 ) {
 }

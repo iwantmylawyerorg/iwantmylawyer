@@ -36,6 +36,7 @@ public class SecurityConfig {
             "/api/v1/client/**",
             "/api/v1/chatbot/**",
             "/api/v1/post/**",
+            "/api/v1/city/**"
             };
     private final JwtFilter jwtFilter;
     private final SecurityUserService securityUserService;
@@ -53,10 +54,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(x ->{x
-                        .requestMatchers(WHITE_LIST_URL).permitAll();
-                        x.requestMatchers( "/api/v1/city/**").hasRole("CLIENT");
-
+                .authorizeHttpRequests(auth ->{
+                    auth.requestMatchers(WHITE_LIST_URL).permitAll();
                 }
 
                 )
