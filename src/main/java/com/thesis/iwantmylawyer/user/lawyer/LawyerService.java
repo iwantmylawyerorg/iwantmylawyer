@@ -99,7 +99,7 @@ public class LawyerService {
 
     public void addTcPhoto(String id,MultipartFile multipartFile){
         Lawyer lawyer = findById(id);
-        lawyer.setLawyerPhoto(minioService.uploadImage(multipartFile));
+        lawyer.setTcPhoto(minioService.uploadImage(multipartFile));
         lawyerRepository.save(lawyer);
     }
     public void addAvukatKartPhoto(String id,MultipartFile multipartFile){

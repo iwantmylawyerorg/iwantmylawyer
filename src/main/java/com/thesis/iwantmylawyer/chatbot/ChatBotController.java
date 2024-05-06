@@ -1,5 +1,7 @@
 package com.thesis.iwantmylawyer.chatbot;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,8 +14,8 @@ public class ChatBotController {
     }
 
     @GetMapping
-    public String chatWithBot(@RequestParam("userInput") String userInput){
-        return  chatBotService.chatWithBot(userInput);
+    public ResponseEntity<ChatBotResponse> chatWithBot(@RequestParam("userInput") String userInput){
+        return new ResponseEntity<>(chatBotService.chatWithBot(userInput), HttpStatus.OK);
     }
     @DeleteMapping
     public void refreshChat(){

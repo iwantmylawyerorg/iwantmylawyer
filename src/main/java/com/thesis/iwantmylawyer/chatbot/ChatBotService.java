@@ -26,14 +26,15 @@ public class ChatBotService {
         messageList.add(systemMessage);
     }
 
-    public String chatWithBot(String userInput){
+    public ChatBotResponse chatWithBot(String userInput){
         UserMessage userMessage = new UserMessage(userInput);
         messageList.add(userMessage);
         Prompt promptList = new Prompt(messageList);
         ChatResponse aiResponse = chatClient.call(promptList);
         messageList.add(aiResponse.getResult().getOutput());
 
-        return aiResponse.getResult().getOutput().getContent();
+        String content = aiResponse.getResult().getOutput().getContent();
+        return new ChatBotResponse(content);
 
     }
     public void refreshMessages(){

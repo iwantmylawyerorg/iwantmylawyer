@@ -5,6 +5,7 @@ import com.thesis.iwantmylawyer.article.ArticleConverter;
 import com.thesis.iwantmylawyer.city.CityConverter;
 import com.thesis.iwantmylawyer.commonquestion.CommonQuestionConverter;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseFieldConverter;
+import com.thesis.iwantmylawyer.minio.MinioService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +17,15 @@ public class LawyerConverter {
     private final ExpertiseFieldConverter expertiseFieldConverter;
     private final ArticleConverter articleConverter;
     private final CommonQuestionConverter commonQuestionConverter;
+    private final MinioService minioService;
 
-    public LawyerConverter(CityConverter cityConverter, AddressConverter addressConverter, ExpertiseFieldConverter expertiseFieldConverter, ArticleConverter articleConverter, CommonQuestionConverter commonQuestionConverter) {
+    public LawyerConverter(CityConverter cityConverter, AddressConverter addressConverter, ExpertiseFieldConverter expertiseFieldConverter, ArticleConverter articleConverter, CommonQuestionConverter commonQuestionConverter, MinioService minioService) {
         this.cityConverter = cityConverter;
         this.addressConverter = addressConverter;
         this.expertiseFieldConverter = expertiseFieldConverter;
         this.articleConverter = articleConverter;
         this.commonQuestionConverter = commonQuestionConverter;
+        this.minioService = minioService;
     }
 
     public LawyerResponse convert(Lawyer from){
@@ -32,7 +35,7 @@ public class LawyerConverter {
                 from.getLastName(),
                 from.getTelephoneNo(),
                 from.getBaroSicilNo(),
-                from.getLawyerPhoto(),
+                minioService.getBase64Image(from.getLawyerPhoto()),
                 from.getAboutMe(),
                 from.getContactEmail(),
                 from.getContactTelNo(),
