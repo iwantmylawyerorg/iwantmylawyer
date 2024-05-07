@@ -41,6 +41,7 @@ public class LawyerService {
     }
 
     public LawyerResponse getById(String id){
+
         return lawyerConverter.convert(findById(id));
     }
 
@@ -53,7 +54,7 @@ public class LawyerService {
     public Page<LawyerGetAllResponse> getAllLawyersWithFilter(Integer page, Integer size,String firstName,String lastName,String city){
         Pageable pageable = PageRequest.of(page, size);
 
-        return lawyerConverter.getAllConvert(lawyerRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCase(firstName.trim(),lastName.trim(),city.trim(),pageable));
+        return lawyerConverter.getAllConvert(lawyerRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCaseAndRole(firstName.trim(),lastName.trim(),city.trim(),Role.LAWYER,pageable));
     }
 
 
