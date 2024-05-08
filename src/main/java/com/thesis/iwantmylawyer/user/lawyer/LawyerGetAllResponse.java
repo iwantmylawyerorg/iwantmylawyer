@@ -6,7 +6,7 @@ public record LawyerGetAllResponse(
         String id,
         String firstName,
         String lastName,
-        String telephoneNo,
+        String contactTelephoneNo,
         String lawyerPhoto,
         CityResponse  baroKayitIl
 ) {

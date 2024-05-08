@@ -23,6 +23,7 @@ public class ExpertiseFieldService {
         return expertiseFieldConverter.convert(expertiseFieldRepository.findAll());
     }
     public List<ExpertiseField> findByIdIn(List<String> idList){
+
         return expertiseFieldRepository.findByIdIn(idList);
     }
 

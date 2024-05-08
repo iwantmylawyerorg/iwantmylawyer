@@ -28,9 +28,9 @@ public class LawyerConverter {
         this.minioService = minioService;
     }
 
-    public LawyerResponse convert(Lawyer from){
+    public LawyerResponse convert(Lawyer from) {
         return new LawyerResponse(
-                from.getContactEmail(),
+                from.getEmail(),
                 from.getFirstName(),
                 from.getLastName(),
                 from.getTelephoneNo(),
@@ -51,13 +51,13 @@ public class LawyerConverter {
         );
     }
 
-    public Page<LawyerGetAllResponse> getAllConvert(Page<Lawyer> fromList){
+    public Page<LawyerGetAllResponse> getAllConvert(Page<Lawyer> fromList) {
         return fromList.map(lawyer -> new LawyerGetAllResponse(
-                        lawyer.getId(),
-                        lawyer.getFirstName(),
-                        lawyer.getLastName(),
-                        lawyer.getTelephoneNo(),
-                        lawyer.getLawyerPhoto(),
-                        cityConverter.convert(lawyer.getBaroKayitIl())));
+                lawyer.getId(),
+                lawyer.getFirstName(),
+                lawyer.getLastName(),
+                lawyer.getContactTelNo(),
+                minioService.getBase64Image(lawyer.getLawyerPhoto()),
+                cityConverter.convert(lawyer.getBaroKayitIl())));
     }
 }
