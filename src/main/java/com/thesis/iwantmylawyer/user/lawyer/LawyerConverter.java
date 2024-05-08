@@ -53,6 +53,7 @@ public class LawyerConverter {
 
     public Page<LawyerGetAllResponse> getAllConvert(Page<Lawyer> fromList){
         return fromList.map(lawyer -> new LawyerGetAllResponse(
+                        lawyer.getId(),
                         lawyer.getFirstName(),
                         lawyer.getLastName(),
                         lawyer.getTelephoneNo(),
