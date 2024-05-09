@@ -42,7 +42,9 @@ public class SecurityConfig {
             "/api/v1/chatbot/**",
             "/api/v1/post/**",
             "/api/v1/city/**",
-            "/api/v1/expertisefield/**"
+            "/api/v1/expertisefield/**",
+            "/api/v1/commonquestion/**",
+            "/api/v1/address/**"
             };
     private final JwtFilter jwtFilter;
     private final SecurityUserService securityUserService;
