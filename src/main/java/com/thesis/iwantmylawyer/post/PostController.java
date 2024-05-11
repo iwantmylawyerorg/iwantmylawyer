@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.stringtemplate.v4.ST;
+
 @Validated
 @RestController
 @RequestMapping("/api/v1/post")
@@ -30,9 +32,8 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createPost(@RequestBody CreatePostRequest createPostRequest){
-        postService.createPost(createPostRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<PostIdResponse> createPost(@RequestBody CreatePostRequest createPostRequest){
+        return new ResponseEntity<>(postService.createPost(createPostRequest),HttpStatus.OK);
     }
     @PutMapping(path = "/addPostPhoto/{id}", consumes =  {MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<Void> addPostPhoto(@PathVariable @NotBlank String id,

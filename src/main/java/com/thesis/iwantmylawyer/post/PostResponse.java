@@ -2,6 +2,7 @@ package com.thesis.iwantmylawyer.post;
 
 import com.thesis.iwantmylawyer.like.LikeResponse;
 import com.thesis.iwantmylawyer.postcomment.PostCommentResponse;
+import com.thesis.iwantmylawyer.user.lawyer.LawyerResponse;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,8 +14,8 @@ public record PostResponse(
         String text,
         String postPhoto,
         LocalDateTime localDateTime,
-        List<PostCommentResponse> postCommentResponseList,
-        List<LikeResponse> likeResponseList
+        List<LikeResponse> likeResponseList,
+        LawyerResponseWithPost lawyerResponseWithPost
 ) implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

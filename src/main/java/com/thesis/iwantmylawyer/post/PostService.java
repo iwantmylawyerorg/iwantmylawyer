@@ -42,11 +42,13 @@ public class PostService {
     }
 
     @CacheEvict(value = Constant.REDIS_POST_CLASS, allEntries = true, condition = "#createPostRequest != null")
-    public void createPost(CreatePostRequest createPostRequest){
+    public PostIdResponse createPost(CreatePostRequest createPostRequest){
         Lawyer lawyer = lawyerService.findById(createPostRequest.lawyerId());
         Post post = new Post(createPostRequest.text(), LocalDateTime.now(),
                 lawyer);
-        postRepository.save(post);
+        Post savedPost = postRepository.save(post);
+
+        return new PostIdResponse(savedPost.getId());
     }
 
     @CacheEvict(value = Constant.REDIS_POST_CLASS, allEntries = true, condition = "#id != null && #multipartFile != null")

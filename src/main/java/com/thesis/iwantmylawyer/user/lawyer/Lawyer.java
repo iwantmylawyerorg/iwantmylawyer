@@ -11,6 +11,7 @@ import com.thesis.iwantmylawyer.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
