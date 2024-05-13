@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,7 +33,7 @@ public class PostService {
     @Cacheable(Constant.REDIS_POST_CLASS)
     public Page<PostResponse> getAllPosts(Integer page, Integer size){
         System.out.println("Veri tabanından geldi");
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size,Sort.by(Sort.Direction.DESC, "localDateTime"));
         return postConverter.convert(postRepository.findAll(pageable));
     }
     @Cacheable(value = Constant.REDIS_POST_CLASS,key = "#postId")

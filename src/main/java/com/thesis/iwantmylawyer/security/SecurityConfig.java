@@ -45,7 +45,8 @@ public class SecurityConfig {
             "/api/v1/expertisefield/**",
             "/api/v1/commonquestion/**",
             "/api/v1/address/**",
-            "/api/v1/post/**"
+            "/api/v1/post/**",
+            "/api/v1/like"
             };
     private final JwtFilter jwtFilter;
     private final SecurityUserService securityUserService;
