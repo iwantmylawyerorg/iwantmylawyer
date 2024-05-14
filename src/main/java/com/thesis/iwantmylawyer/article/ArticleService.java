@@ -28,7 +28,7 @@ public class ArticleService {
         return articleConverter.convert(findById(articleId));
     }
 
-    public void createArticle(CreateArticleRequest createArticleRequest){
+    public ArticleResponseWithId createArticle(CreateArticleRequest createArticleRequest){
         Lawyer lawyer = lawyerService.findById(createArticleRequest.lawyerId());
         Article article = new Article(
                 createArticleRequest.header(),
@@ -37,7 +37,9 @@ public class ArticleService {
                 lawyer
         );
 
-        articleRepository.save(article);
+        Article savedArticle = articleRepository.save(article);
+
+        return new ArticleResponseWithId(savedArticle.getId());
     }
 
     public void updateArticle(UpdateArticleRequest updateArticleRequest){

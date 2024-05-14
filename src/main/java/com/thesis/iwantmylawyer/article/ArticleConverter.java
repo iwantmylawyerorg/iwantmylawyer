@@ -1,6 +1,7 @@
 package com.thesis.iwantmylawyer.article;
 
 import com.thesis.iwantmylawyer.city.CityResponse;
+import com.thesis.iwantmylawyer.minio.MinioService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -8,6 +9,11 @@ import java.util.List;
 @Component
 public class ArticleConverter {
 
+    private final MinioService minioService;
+
+    public ArticleConverter(MinioService minioService) {
+        this.minioService = minioService;
+    }
 
     public List<ArticleResponse> convert(List<Article> fromList){
         return fromList.stream().map(article -> new ArticleResponse(
@@ -15,7 +21,7 @@ public class ArticleConverter {
                 article.getHeader(),
                 article.getText(),
                 article.getLocalDateTime(),
-                article.getPhoto())).toList();
+                minioService.getBase64Image(article.getPhoto()))).toList();
 
     }
 
@@ -25,7 +31,7 @@ public class ArticleConverter {
                 from.getHeader(),
                 from.getText(),
                 from.getLocalDateTime(),
-                from.getPhoto()
+                minioService.getBase64Image(from.getPhoto())
         );
     }
 }

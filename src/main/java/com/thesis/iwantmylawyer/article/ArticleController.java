@@ -26,9 +26,8 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createArticle(@RequestBody CreateArticleRequest createArticleRequest){
-        articleService.createArticle(createArticleRequest);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<ArticleResponseWithId> createArticle(@RequestBody CreateArticleRequest createArticleRequest){
+        return new ResponseEntity<>(articleService.createArticle(createArticleRequest),HttpStatus.CREATED);
     }
     @PutMapping
     public ResponseEntity<Void> updateArticle(@RequestBody UpdateArticleRequest updateArticleRequest){
@@ -37,7 +36,7 @@ public class ArticleController {
     }
 
     @PutMapping("/{articleId}")
-    public ResponseEntity<Void> deleteArticle(@PathVariable @NotBlank String articleId, @RequestPart("file") @NotNull MultipartFile file){
+    public ResponseEntity<Void> uploadPhotoForArticle(@PathVariable @NotBlank String articleId, @RequestPart("file") @NotNull MultipartFile file){
         articleService.uploadPhotoForArticle(articleId, file);
         return new ResponseEntity<>(HttpStatus.OK);
     }
