@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 public class LikeConverter {
+
     private final UserConverter userConverter;
 
     public LikeConverter(UserConverter userConverter) {
@@ -17,7 +18,6 @@ public class LikeConverter {
                 new LikeResponse(
                         like.getId(),
                         like.getLocalDateTime(),
-                        userConverter.convert(like.getUser())
-                        )).toList();
+                        userConverter.convert(like.getUser()))).toList();
     }
 }
