@@ -18,8 +18,7 @@ public class Constant {
     public static final String POSTCOMMENT_DOES_NOT_FOUND_EXCEPTION = "PostComment does not found!";
     public static final String USER_NOT_FOUND_EXCEPTION = "User not found!";
     public static final String LIKE_NOT_FOUND_EXCEPTION = "Like not found!";
-    public static final String AI_SYSTEM_PROMPT = "you are a lawyer ai.";
-
+    public static final String AI_SYSTEM_PROMPT = "You are an AI lawyer assistant. You will help users in any law related question they have. You will not accept any question not related to law.";
     public static final String REDIS_POST_CLASS = "post";
 
 
