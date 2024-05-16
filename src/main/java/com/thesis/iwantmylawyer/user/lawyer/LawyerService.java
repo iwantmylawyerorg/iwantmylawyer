@@ -44,6 +44,9 @@ public class LawyerService {
 
         return lawyerConverter.convert(findById(id));
     }
+    public UnconfirmedLawyerResponse getUnconfirmedLawyerById(String id){
+        return lawyerConverter.unconfirmedConvert(findById(id));
+    }
 
     public Page<LawyerGetAllResponse> getAllLawyers(Integer page, Integer size){
         System.out.println("veritabanından zort");
@@ -55,6 +58,12 @@ public class LawyerService {
         Pageable pageable = PageRequest.of(page, size);
 
         return lawyerConverter.getAllConvert(lawyerRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCaseAndRole(firstName.trim(),lastName.trim(),city.trim(),Role.LAWYER,pageable));
+    }
+
+    public Page<LawyerGetAllResponse> getAllUnconfirmedLawyers(Integer page,Integer size){
+        Pageable pageable = PageRequest.of(page, size);
+
+        return lawyerConverter.getAllConvert(lawyerRepository.findAllByRole(Role.LAWYER_UNCONFIRMED,pageable));
     }
 
 

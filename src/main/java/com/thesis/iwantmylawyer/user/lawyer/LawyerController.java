@@ -26,11 +26,20 @@ public class LawyerController {
     public ResponseEntity<LawyerResponse> getById(@PathVariable @NotBlank String id){
         return new ResponseEntity<>(lawyerService.getById(id), HttpStatus.OK);
     }
+    @GetMapping("/unconfirmedLawyer/{id}")
+    public ResponseEntity<UnconfirmedLawyerResponse> getUnconfirmedById(@PathVariable @NotBlank String id){
+        return new ResponseEntity<>(lawyerService.getUnconfirmedLawyerById(id),HttpStatus.OK);
+    }
 
     @GetMapping("/{page}/{size}")
     public ResponseEntity<Page<LawyerGetAllResponse>> getAllLawyers(@PathVariable @NotNull Integer page,
                                                                     @PathVariable @NotNull Integer size){
         return new ResponseEntity<>(lawyerService.getAllLawyers(page, size),HttpStatus.OK);
+    }
+    @GetMapping("/unconfirmedLawyers/{page}/{size}")
+    public ResponseEntity<Page<LawyerGetAllResponse>> getAllUnconfirmedLawyers(@PathVariable @NotNull Integer page,
+                                                                               @PathVariable @NotNull Integer size){
+        return new ResponseEntity<>(lawyerService.getAllUnconfirmedLawyers(page, size),HttpStatus.OK);
     }
    @GetMapping("/{page}/{size}/{firstName}/{lastName}/{city}")
     public ResponseEntity<Page<LawyerGetAllResponse>> getAllLawyersWithFilter(@PathVariable(required = false) Integer page,

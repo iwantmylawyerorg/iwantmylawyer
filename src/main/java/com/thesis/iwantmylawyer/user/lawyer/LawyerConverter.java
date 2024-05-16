@@ -50,6 +50,18 @@ public class LawyerConverter {
 
         );
     }
+    public UnconfirmedLawyerResponse unconfirmedConvert(Lawyer from){
+        return new UnconfirmedLawyerResponse(
+                from.getFirstName(),
+                from.getLastName(),
+                from.getBaroSicilNo(),
+                from.getTcNo(),
+                minioService.getBase64Image(from.getLawyerPhoto()),
+                minioService.getBase64Image(from.getAvukatKartPhoto()),
+                minioService.getBase64Image(from.getTcPhoto()),
+                addressConverter.convert(from.getAddress())
+        );
+    }
 
     public Page<LawyerGetAllResponse> getAllConvert(Page<Lawyer> fromList) {
         return fromList.map(lawyer -> new LawyerGetAllResponse(
