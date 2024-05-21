@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LawyerService {
@@ -54,10 +55,11 @@ public class LawyerService {
         return lawyerConverter.getAllConvert(lawyerRepository.findAll(pageable));
     }
 
-    public Page<LawyerGetAllResponse> getAllLawyersWithFilter(Integer page, Integer size,String firstName,String lastName,String city,String name){
+    public Page<LawyerGetAllResponse> getAllLawyersWithFilter(Integer page, Integer size,String firstName,String lastName,String city){
         Pageable pageable = PageRequest.of(page, size);
+        Page<Lawyer> lawyers = lawyerRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCaseAndRole(firstName.trim(), lastName.trim(), city.trim(), Role.LAWYER,pageable);
 
-        return lawyerConverter.getAllConvert(lawyerRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCaseAndRoleAndExpertiseFieldList_NameIgnoreCase(firstName.trim(),lastName.trim(),city.trim(),Role.LAWYER,name,pageable));
+        return lawyerConverter.getAllConvert(lawyers);
     }
 
     public Page<LawyerGetAllResponse> getAllUnconfirmedLawyers(Integer page,Integer size){

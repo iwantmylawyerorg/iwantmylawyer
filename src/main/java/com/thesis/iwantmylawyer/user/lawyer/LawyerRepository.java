@@ -14,7 +14,8 @@ public interface LawyerRepository extends JpaRepository<Lawyer, String> {
 
 
     Optional<Lawyer> findByEmail(String email);
-    Page<Lawyer> findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCaseAndRoleAndExpertiseFieldList_NameIgnoreCase(String firstName, String lastName, String city, Role role,String name, Pageable pageable);
+
+    Page<Lawyer> findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCaseAndRole(String firstName, String lastName, String city, Role role,Pageable pageable);
 
     Page<Lawyer> findAllByRole(Role role,Pageable pageable);
 

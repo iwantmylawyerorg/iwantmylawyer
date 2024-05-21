@@ -19,7 +19,6 @@ public class ExpertiseField {
 
     private String name;
 
-
     public ExpertiseField(String name) {
         this.name = name;
     }
