@@ -41,13 +41,14 @@ public class LawyerController {
                                                                                @PathVariable @NotNull Integer size){
         return new ResponseEntity<>(lawyerService.getAllUnconfirmedLawyers(page, size),HttpStatus.OK);
     }
-   @GetMapping("/{page}/{size}/{firstName}/{lastName}/{city}")
+   @GetMapping("/{page}/{size}/{firstName}/{lastName}/{city}/{name}")
     public ResponseEntity<Page<LawyerGetAllResponse>> getAllLawyersWithFilter(@PathVariable(required = false) Integer page,
                                                                               @PathVariable(required = false) Integer size,
                                                                               @PathVariable(required = false) String firstName,
                                                                               @PathVariable(required = false) String lastName,
-                                                                              @PathVariable(required = false) String city){
-        return new ResponseEntity<>(lawyerService.getAllLawyersWithFilter(page, size, firstName, lastName, city),HttpStatus.OK);
+                                                                              @PathVariable(required = false) String city,
+                                                                              @PathVariable(required = false) String name){
+        return new ResponseEntity<>(lawyerService.getAllLawyersWithFilter(page, size, firstName, lastName, city,name),HttpStatus.OK);
     }
 
     @PostMapping

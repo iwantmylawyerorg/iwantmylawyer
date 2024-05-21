@@ -54,10 +54,10 @@ public class LawyerService {
         return lawyerConverter.getAllConvert(lawyerRepository.findAll(pageable));
     }
 
-    public Page<LawyerGetAllResponse> getAllLawyersWithFilter(Integer page, Integer size,String firstName,String lastName,String city){
+    public Page<LawyerGetAllResponse> getAllLawyersWithFilter(Integer page, Integer size,String firstName,String lastName,String city,String name){
         Pageable pageable = PageRequest.of(page, size);
 
-        return lawyerConverter.getAllConvert(lawyerRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCaseAndRole(firstName.trim(),lastName.trim(),city.trim(),Role.LAWYER,pageable));
+        return lawyerConverter.getAllConvert(lawyerRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndBaroKayitIl_NameContainingIgnoreCaseAndRoleAndExpertiseFieldList_NameIgnoreCase(firstName.trim(),lastName.trim(),city.trim(),Role.LAWYER,name,pageable));
     }
 
     public Page<LawyerGetAllResponse> getAllUnconfirmedLawyers(Integer page,Integer size){
