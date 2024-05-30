@@ -23,6 +23,7 @@ public class ClientController {
     public ResponseEntity<ClientResponse> getClientById(@PathVariable @NotBlank String clientId){
          return new ResponseEntity<>(clientService.getClientById(clientId),HttpStatus.OK);
     }
+
     @PutMapping
     public ResponseEntity<Void> updateClient(@RequestBody @Valid UpdateClientRequest updateClientRequest){
         clientService.updateClient(updateClientRequest);

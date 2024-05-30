@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,21 +26,25 @@ public class ArticleController {
         return new ResponseEntity<>(articleService.getById(articleId),HttpStatus.OK);
     }
 
+    @PreAuthorize("(hasAnyRole('LAWYER','LAWYER_UNCONFIRMED'))")
     @PostMapping
     public ResponseEntity<ArticleResponseWithId> createArticle(@RequestBody CreateArticleRequest createArticleRequest){
         return new ResponseEntity<>(articleService.createArticle(createArticleRequest),HttpStatus.CREATED);
     }
+    @PreAuthorize("(hasAnyRole('LAWYER','LAWYER_UNCONFIRMED'))")
     @PutMapping
     public ResponseEntity<Void> updateArticle(@RequestBody UpdateArticleRequest updateArticleRequest){
         articleService.updateArticle(updateArticleRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("(hasAnyRole('LAWYER','LAWYER_UNCONFIRMED'))")
     @PutMapping("/{articleId}")
     public ResponseEntity<Void> uploadPhotoForArticle(@PathVariable @NotBlank String articleId, @RequestPart("file") @NotNull MultipartFile file){
         articleService.uploadPhotoForArticle(articleId, file);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @PreAuthorize("(hasAnyRole('LAWYER','LAWYER_UNCONFIRMED'))")
     @DeleteMapping("/{articleId}")
     public ResponseEntity<Void> deleteArticle(@PathVariable @NotBlank String articleId){
         articleService.deleteById(articleId);

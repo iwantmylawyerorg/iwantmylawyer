@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +26,7 @@ public class ExpertiseFieldController {
     public ResponseEntity<List<ExpertiseFieldResponse>> getAllExpertiseFields(){
         return new ResponseEntity<>(expertiseFieldService.getAllExpertiseField(),HttpStatus.OK);
     }
-
+    @PreAuthorize("(hasAnyRole('LAWYER','LAWYER_UNCONFIRMED'))")
     @PostMapping(path = "/{name}")
     public ResponseEntity<Void> createExpertiseField(
             @PathVariable("name") @NotBlank String name){
