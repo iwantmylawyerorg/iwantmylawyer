@@ -6,6 +6,7 @@ import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseFieldService;
 import com.thesis.iwantmylawyer.mail.MailService;
+import com.thesis.iwantmylawyer.mail.SendMailRequest;
 import com.thesis.iwantmylawyer.minio.MinioService;
 import com.thesis.iwantmylawyer.user.Role;
 import com.thesis.iwantmylawyer.user.UserService;
@@ -50,7 +51,6 @@ public class LawyerService {
     }
 
     public Page<LawyerGetAllResponse> getAllLawyers(Integer page, Integer size){
-        System.out.println("veritabanından zort");
         Pageable pageable = PageRequest.of(page, size);
         return lawyerConverter.getAllConvert(lawyerRepository.findAll(pageable));
     }
@@ -87,9 +87,8 @@ public class LawyerService {
                 Role.LAWYER_UNCONFIRMED
         );
         lawyerRepository.save(lawyer);
-        /* TODO ACMAYI UNUTMA
-        SendMailRequest sendMailRequest = new SendMailRequest(lawyer.getEmail(),"Hesabın oluşturuldu","Pompa");
-        mailService.sendMail(sendMailRequest); */
+        SendMailRequest sendMailRequest = new SendMailRequest(lawyer.getEmail(),"Welcome to I Want My Lawyer! To get started as a lawyer complete the activate account steps in your settings page. After that your account will be activated in 1 week.","Activate Your Account");
+        mailService.sendMail(sendMailRequest);
     }
     public Lawyer findById(String id){
         return lawyerRepository.findById(id).orElseThrow(() -> new LawyerNotFoundException(Constant.LAWYER_DOES_NOT_FOUND_EXCEPTION));
