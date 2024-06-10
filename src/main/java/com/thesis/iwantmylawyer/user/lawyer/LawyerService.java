@@ -6,6 +6,7 @@ import com.thesis.iwantmylawyer.constant.Constant;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseField;
 import com.thesis.iwantmylawyer.expertisefield.ExpertiseFieldService;
 import com.thesis.iwantmylawyer.mail.MailService;
+import com.thesis.iwantmylawyer.mail.SendMailRequest;
 import com.thesis.iwantmylawyer.minio.MinioService;
 import com.thesis.iwantmylawyer.user.Role;
 import com.thesis.iwantmylawyer.user.UserService;
@@ -87,9 +88,9 @@ public class LawyerService {
                 Role.LAWYER_UNCONFIRMED
         );
         lawyerRepository.save(lawyer);
-        /* TODO ACMAYI UNUTMA
+
         SendMailRequest sendMailRequest = new SendMailRequest(lawyer.getEmail(),"Hesabın oluşturuldu","Pompa");
-        mailService.sendMail(sendMailRequest); */
+        mailService.sendMail(sendMailRequest);
     }
     public Lawyer findById(String id){
         return lawyerRepository.findById(id).orElseThrow(() -> new LawyerNotFoundException(Constant.LAWYER_DOES_NOT_FOUND_EXCEPTION));
