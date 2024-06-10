@@ -116,7 +116,7 @@ public class LawyerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("(hasAnyRole('LAWYER','LAWYER_UNCONFIRMED'))")
+    @PreAuthorize("(hasAnyRole('ADMIN'))")
     @PutMapping("/addRoleToLawyer/{id}")
     public ResponseEntity<Void> addRoleToLawyer(@PathVariable String id){
         lawyerService.addRoleForLawyer(id);
