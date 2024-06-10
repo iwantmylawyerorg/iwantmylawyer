@@ -89,7 +89,7 @@ public class LawyerService {
         );
         lawyerRepository.save(lawyer);
 
-        SendMailRequest sendMailRequest = new SendMailRequest(lawyer.getEmail(),"Hesabın oluşturuldu","Pompa");
+        SendMailRequest sendMailRequest = new SendMailRequest(lawyer.getEmail(),"Your account has been created. To activate your account as a lawyer, please complete the activate account steps in your settings.","Welcome to IWantMyLawyer");
         mailService.sendMail(sendMailRequest);
     }
     public Lawyer findById(String id){
