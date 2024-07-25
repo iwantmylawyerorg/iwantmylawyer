@@ -3,10 +3,12 @@ package com.thesis.iwantmylawyer.security;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -20,10 +22,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 @EnableWebSecurity
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
     private static final String[] WHITE_LIST_URL = {
             "/v2/api-docs",
@@ -37,17 +41,9 @@ public class SecurityConfig {
             "/webjars/**",
             "/swagger-ui.html",
             "/api/v1/auth/**",
-            "/api/v1/lawyer/**",
             "/api/v1/client/**",
-            "/api/v1/chatbot/**",
-            "/api/v1/post/**",
             "/api/v1/city/**",
-            "/api/v1/expertisefield/**",
-            "/api/v1/commonquestion/**",
-            "/api/v1/address/**",
-            "/api/v1/post/**",
-            "/api/v1/like/**",
-            "/api/v1/article/**",
+            "/api/v1/auth/refresh-token",
             };
     private final JwtFilter jwtFilter;
     private final SecurityUserService securityUserService;
@@ -68,6 +64,13 @@ public class SecurityConfig {
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(getCorsConfiguration()))
                 .authorizeHttpRequests(auth ->{
                     auth.requestMatchers(WHITE_LIST_URL).permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/api/v1/post/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/api/v1/expertisefield/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/api/v1/lawyer/**").permitAll();
+                    auth.requestMatchers(HttpMethod.POST,"/api/v1/lawyer/**").permitAll();
+                    auth.requestMatchers(HttpMethod.POST,"/api/v1/client/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/api/v1/article/**").permitAll();
+                    auth.anyRequest().authenticated();
                 }
 
                 )

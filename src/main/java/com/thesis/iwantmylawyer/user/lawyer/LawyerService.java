@@ -87,7 +87,7 @@ public class LawyerService {
                 Role.LAWYER_UNCONFIRMED
         );
         lawyerRepository.save(lawyer);
-        SendMailRequest sendMailRequest = new SendMailRequest(lawyer.getEmail(),"Welcome to I Want My Lawyer! To get started as a lawyer complete the activate account steps in your settings page. After that your account will be activated in 1 week.","Activate Your Account");
+        SendMailRequest sendMailRequest = new SendMailRequest(lawyer.getEmail(),"Your account has been created. To activate your account as a lawyer, please complete the activate account steps in your settings.","Welcome to IWantMyLawyer");
         mailService.sendMail(sendMailRequest);
     }
     public Lawyer findById(String id){
@@ -130,11 +130,11 @@ public class LawyerService {
     }
     public void updateSocialContact(UpdateSocialContactRequest request){
         Lawyer lawyer = findById(request.id());
-        lawyer.setContactEmail(request.contactEmail().trim().isEmpty() ? lawyer.getContactEmail() : request.contactEmail());
-        lawyer.setContactTelNo(request.contactTelNo().trim().isEmpty() ? lawyer.getContactTelNo() : request.contactTelNo());
-        lawyer.setContactFaceBookUrl(request.contactFaceBookUrl().trim().isEmpty() ? lawyer.getContactFaceBookUrl() : request.contactFaceBookUrl());
-        lawyer.setContactInstagramUrl(request.contactInstagramUrl().trim().isEmpty() ? lawyer.getContactInstagramUrl() : request.contactInstagramUrl());
-        lawyer.setContactTwitterUrl(request.contactTwitterUrl().trim().isEmpty() ? lawyer.getContactTwitterUrl() : request.contactTwitterUrl());
+        lawyer.setContactEmail(request.contactEmail() == null ? lawyer.getContactEmail() : request.contactEmail());
+        lawyer.setContactTelNo(request.contactTelNo() == null ? lawyer.getContactTelNo() : request.contactTelNo());
+        lawyer.setContactFaceBookUrl(request.contactFaceBookUrl() == null ? lawyer.getContactFaceBookUrl() : request.contactFaceBookUrl());
+        lawyer.setContactInstagramUrl(request.contactInstagramUrl() == null ? lawyer.getContactInstagramUrl() : request.contactInstagramUrl());
+        lawyer.setContactTwitterUrl(request.contactTwitterUrl() == null ? lawyer.getContactTwitterUrl() : request.contactTwitterUrl());
         lawyerRepository.save(lawyer);
     }
 

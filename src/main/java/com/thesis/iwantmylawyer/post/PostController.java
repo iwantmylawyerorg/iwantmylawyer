@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,16 +32,19 @@ public class PostController {
         return new ResponseEntity<>(postService.getPostById(postId),HttpStatus.OK);
     }
 
+    @PreAuthorize("(hasAnyRole('LAWYER','LAWYER_UNCONFIRMED'))")
     @PostMapping
     public ResponseEntity<PostIdResponse> createPost(@RequestBody CreatePostRequest createPostRequest){
         return new ResponseEntity<>(postService.createPost(createPostRequest),HttpStatus.OK);
     }
+    @PreAuthorize("(hasAnyRole('LAWYER','LAWYER_UNCONFIRMED'))")
     @PutMapping(path = "/addPostPhoto/{id}", consumes =  {MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<Void> addPostPhoto(@PathVariable @NotBlank String id,
                                              @RequestPart("file") @NotNull MultipartFile file){
         postService.addPostPhoto(id, file);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @PreAuthorize("(hasAnyRole('LAWYER','LAWYER_UNCONFIRMED'))")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable String id){
         postService.deletePost(id);

@@ -2,6 +2,7 @@ package com.thesis.iwantmylawyer.like;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,6 +13,7 @@ public class LikeController {
     public LikeController(LikeService likeService) {
         this.likeService = likeService;
     }
+
 
     @PostMapping
     public ResponseEntity<Void> createLike(@RequestBody CreateLikeRequest createLikeRequest){
